@@ -1,0 +1,61 @@
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: credit_card_mysql
+    restart: always
+
+    environment:
+      MYSQL_DATABASE: credit_card_db
+      MYSQL_USER: creditcard_user
+      MYSQL_PASSWORD: creditcard_password
+      MYSQL_ROOT_PASSWORD: root_password
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+
+  django:
+    build: .
+    container_name: credit_card_django
+    restart: always
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: fastapi_backend/Dockerfile
+
+    container_name: credit_card_fastapi
+    restart: always
+
+    command: uvicorn fastapi_backend.main:app --host 0.0.0.0 --port 8001
+
+    ports:
+      - "8001:8001"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+
+volumes:
+  mysql_data:
