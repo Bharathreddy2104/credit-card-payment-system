@@ -1,34 +1,73 @@
 # Credit Card Payment System
 
-A backend project for managing users, credit/debit cards, and credit card payments using Django REST Framework and FastAPI.
+A backend application for managing users, credit cards, payments, and transactions.
 
-## Technologies Used
+## Tech Stack
 
-- Python
 - Django
 - Django REST Framework
 - FastAPI
 - MySQL
 - JWT Authentication
 - Docker
-- Docker Compose
-- Swagger / OpenAPI
 - Postman
+
+## Features
+
+### User Authentication
+- User Registration
+- User Login
+- JWT Authentication
+- Protected APIs
+- Password Hashing
+
+### Card Management
+- Add Credit Card
+- View Credit Cards
+- Delete Credit Card
+- Card Number Masking
+- No CVV Storage
+
+### Payment Processing
+- Create Payment
+- Process Payment
+- Payment Status
+- Transaction ID Generation
+
+### Transaction Management
+- Create Transactions
+- Process Transactions
+- Transaction Status
+- Transaction History
+
+### Admin Panel
+- Manage Users
+- Manage Cards
+- Manage Transactions
+
+## Security
+
+- JWT Authentication
+- Password Hashing
+- Protected APIs
+- Card Number Masking
+- CVV is not stored
+- No plain-text passwords
 
 ## Project Structure
 
 ```text
 credit_card_payment_system/
 │
-├── config/
-├── users/
 ├── cards/
-├── transactions/
+├── config/
 ├── fastapi_backend/
-│
+├── transactions/
+├── users/
 ├── manage.py
+├── credit_card_db.sql
+├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
-├── requirements.txt
-├── credit_card_db.sql
+├── README.md
 └── Credit Card Payment System.postman_collection.json
